@@ -45,6 +45,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+	        BASE_URL: /cafe/
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
