@@ -14,6 +14,11 @@ export const MenuSection: React.FC<MenuSectionProps> = ({ onSelectItem, onQuickA
   const [activeCategory, setActiveCategory] = useState<CategoryTab>('all');
   const [activeDietary, setActiveDietary] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (id: string) => {
+    setImageErrors(prev => ({ ...prev, [id]: true }));
+  };
 
   const categories: { id: CategoryTab; label: string }[] = [
     { id: 'all', label: 'All Offerings' },
@@ -177,31 +182,49 @@ export const MenuSection: React.FC<MenuSectionProps> = ({ onSelectItem, onQuickA
                 onClick={() => onSelectItem(item)}
                 className="group relative bg-white rounded-xl border border-[#E5DDD2] overflow-hidden flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
               >
-                {/* Visual Header Banner */}
-                <div className={`h-36 p-5 bg-gradient-to-br ${item.visualTheme.bgGradient} text-white flex flex-col justify-between relative overflow-hidden`}>
-                  
-                  {/* Subtle background glow */}
-                  <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-white/10 blur-md pointer-events-none" />
+                {/* Visual Header Photo Container */}
+                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-[#241A13]">
+                  {!imageErrors[item.id] ? (
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      onError={() => handleImageError(item.id)}
+                      className="w-full h-full object-cover object-center transform scale-100 group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${item.visualTheme.bgGradient} flex items-center justify-center text-white/80`}>
+                      <Coffee className="w-10 h-10 stroke-1" />
+                    </div>
+                  )}
 
-                  {/* Top line metadata (unboxed text) */}
-                  <div className="flex items-center justify-between text-xs text-[#E5DDCF] font-medium relative z-10">
-                    <span className="uppercase tracking-wider">{item.category}</span>
+                  {/* Gradient Scrim for Contrast & Legibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/30 pointer-events-none" />
+
+                  {/* Top line metadata overlay (unboxed text with text shadow) */}
+                  <div className="absolute top-3 left-4 right-4 flex items-center justify-between text-xs text-white/90 font-medium z-10 drop-shadow-xs">
+                    <span className="uppercase tracking-wider text-[11px] font-semibold text-white/95">
+                      {item.category}
+                    </span>
                     {item.calories && (
-                      <span className="tabular-nums font-mono opacity-80">{item.calories} kcal</span>
+                      <span className="tabular-nums font-mono text-[11px] text-white/80">
+                        {item.calories} kcal
+                      </span>
                     )}
                   </div>
 
-                  {/* Graphic icon or signature badge */}
-                  <div className="relative z-10 flex items-end justify-between">
-                    <div>
+                  {/* Bottom line tag & origin overlay */}
+                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between z-10">
+                    <div className="min-w-0 pr-2">
                       {item.origin && (
-                        <p className="text-[11px] text-[#D8CCC0] truncate max-w-[210px] leading-tight">
+                        <p className="text-[11px] text-white/85 truncate leading-tight drop-shadow-xs">
                           {item.origin}
                         </p>
                       )}
                     </div>
                     {item.tags.includes('signature') && (
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-[#F59E0B] flex items-center gap-1">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-[#FDE047] flex items-center gap-1 drop-shadow-xs shrink-0">
                         <Sparkles className="w-3 h-3" />
                         Signature
                       </span>

@@ -152,6 +152,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               {items.map((cartItem) => (
                 <div key={cartItem.cartItemId} className="py-3 flex gap-3 items-start">
                   
+                  {/* Thumbnail Image */}
+                  <img
+                    src={cartItem.menuItem.image}
+                    alt={cartItem.menuItem.name}
+                    className="w-14 h-14 rounded-lg object-cover bg-[#E8DFD3] shrink-0 border border-[#DDD5C7]"
+                    referrerPolicy="no-referrer"
+                  />
+
                   {/* Item Details */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-1">

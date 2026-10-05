@@ -98,21 +98,29 @@ export const OrderReceiptModal: React.FC<OrderReceiptModalProps> = ({ order, onC
 
           <div className="divide-y divide-[#F0EAE1]">
             {order.items.map((item, idx) => (
-              <div key={idx} className="py-2 flex items-start justify-between gap-2">
-                <div>
-                  <div className="font-semibold text-[#24211E]">
-                    {item.quantity}x {item.menuItem.name}
-                  </div>
-                  {item.customization.milk && (
-                    <div className="text-[11px] text-[#8A796A]">Milk: {item.customization.milk}</div>
-                  )}
-                  {item.customization.selectedAdditions && item.customization.selectedAdditions.length > 0 && (
-                    <div className="text-[11px] text-[#8A796A]">
-                      +{item.customization.selectedAdditions.join(', ')}
+              <div key={idx} className="py-2.5 flex items-start justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <img
+                    src={item.menuItem.image}
+                    alt={item.menuItem.name}
+                    className="w-10 h-10 rounded-md object-cover bg-[#E8DFD3] shrink-0 border border-[#DDD5C7]"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div>
+                    <div className="font-semibold text-[#24211E] truncate">
+                      {item.quantity}x {item.menuItem.name}
                     </div>
-                  )}
+                    {item.customization.milk && (
+                      <div className="text-[11px] text-[#8A796A]">Milk: {item.customization.milk}</div>
+                    )}
+                    {item.customization.selectedAdditions && item.customization.selectedAdditions.length > 0 && (
+                      <div className="text-[11px] text-[#8A796A]">
+                        +{item.customization.selectedAdditions.join(', ')}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <span className="font-mono font-medium text-[#24211E] tabular-nums">
+                <span className="font-mono font-medium text-[#24211E] tabular-nums shrink-0 pt-0.5">
                   ${item.itemTotal.toFixed(2)}
                 </span>
               </div>

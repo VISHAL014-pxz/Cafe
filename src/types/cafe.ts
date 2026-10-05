@@ -13,6 +13,7 @@ export interface MenuItem {
   allergens?: string[];
   tags: DietaryTag[];
   popular?: boolean;
+  image: string;
   options?: {
     milks?: string[];
     sweetness?: string[];

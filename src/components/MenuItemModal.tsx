@@ -18,6 +18,7 @@ export const MenuItemModal: React.FC<MenuItemModalProps> = ({ item, onClose, onA
   const [selectedAdditions, setSelectedAdditions] = useState<string[]>([]);
   const [specialInstructions, setSpecialInstructions] = useState('');
   const [addedAnimation, setAddedAnimation] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Compute additions cost
   const additionsTotal = selectedAdditions.reduce((acc, addName) => {
@@ -66,37 +67,55 @@ export const MenuItemModal: React.FC<MenuItemModalProps> = ({ item, onClose, onA
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Visual Banner */}
-        <div className={`p-6 bg-gradient-to-r ${item.visualTheme.bgGradient} text-white relative flex-shrink-0`}>
+        <div className="relative h-60 w-full overflow-hidden bg-[#241A13] flex-shrink-0">
+          {!imageError ? (
+            <img
+              src={item.image}
+              alt={item.name}
+              referrerPolicy="no-referrer"
+              onError={() => setImageError(true)}
+              className="w-full h-full object-cover object-center"
+            />
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-r ${item.visualTheme.bgGradient}`} />
+          )}
+
+          {/* Measured Dark Scrim for Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30 pointer-events-none" />
+
+          {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
+            className="absolute top-4 right-4 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors z-20"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />
           </button>
           
-          <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#E5DDCF] mb-2 font-medium">
-            <span>{item.category.toUpperCase()}</span>
-            {item.caffeineLevel && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span>{item.caffeineLevel} Caffeine</span>
-              </>
-            )}
-            {item.calories && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span className="tabular-nums">{item.calories} kcal</span>
-              </>
-            )}
-          </div>
+          <div className="absolute bottom-5 left-6 right-6 z-10">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-white/90 mb-1.5 font-medium drop-shadow-xs">
+              <span className="font-semibold text-white">{item.category}</span>
+              {item.caffeineLevel && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>{item.caffeineLevel} Caffeine</span>
+                </>
+              )}
+              {item.calories && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span className="tabular-nums font-mono">{item.calories} kcal</span>
+                </>
+              )}
+            </div>
 
-          <h3 className="text-2xl font-display font-medium text-white mb-2 leading-tight">
-            {item.name}
-          </h3>
+            <h3 className="text-2xl font-display font-medium text-white mb-2 leading-tight drop-shadow-sm">
+              {item.name}
+            </h3>
 
-          <div className="text-xl font-mono font-semibold text-[#F59E0B] tabular-nums">
-            ${item.price.toFixed(2)}
+            <div className="text-xl font-mono font-semibold text-[#FDE047] tabular-nums drop-shadow-xs">
+              ${item.price.toFixed(2)}
+            </div>
           </div>
         </div>
 
