@@ -1,0 +1,6 @@
+{
+  "name": "Velvet & Stone – Artisan Cafe & Table",
+  "description": "Artisanal specialty coffee roastery, sourdough bakery, curated seasonal dining, and live table reservation system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Velvet & Stone – Artisan Cafe & Table</title>
+    <meta name="description" content="Artisanal specialty coffee roastery, sourdough bakery, curated seasonal dining, and live table reservation system." />
+    <meta property="og:title" content="Velvet & Stone – Artisan Cafe & Table" />
+    <meta property="og:description" content="Artisanal specialty coffee roastery, sourdough bakery, curated seasonal dining, and live table reservation system." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "Velvet & Stone",
+      "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24",
+      "servesCuisine": ["Coffee", "Artisan Bakery", "All-Day Brunch", "Contemporary Cafe"],
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "428 Elmwood Promenade",
+        "addressLocality": "Metropolis",
+        "postalCode": "90210",
+        "addressCountry": "US"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "07:30",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "08:00",
+          "closes": "22:00"
+        }
+      ],
+      "acceptsReservations": "True"
+    }
+    </script>
+  </head>
+  <body class="bg-[#FAF7F2] text-[#24211E] antialiased selection:bg-[#785E4F] selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
